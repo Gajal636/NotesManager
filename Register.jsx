@@ -1,5 +1,5 @@
 import React from "react";
-import api from "../axios"; // Consistent import
+import api from "/axios"; // Consistent import
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -94,3 +94,4 @@ const Register = () => {
 };
 
 export default Register;
+
