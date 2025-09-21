@@ -1,10 +1,10 @@
-import React from "react";
-import api from "/axios"; // Consistent import
+import React, { useState } from "react";
+import api from "../axios";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [form, setForm] = React.useState({ name: "", email: "", password: "" }); // React.useState for React 19
-  const [message, setMessage] = React.useState("");
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   
   const handleChange = (e) => {
@@ -14,10 +14,9 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post("/register", form); // Using api instead of axios
+      const res = await api.post("/register", form);
       setMessage("✅ " + res.data.message);
       
-      // 2 seconds wait karke login pe redirect
       setTimeout(() => {
         navigate("/login");
       }, 2000);
@@ -94,4 +93,3 @@ const Register = () => {
 };
 
 export default Register;
-
