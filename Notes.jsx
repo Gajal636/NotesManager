@@ -13,7 +13,7 @@ const Notes = () => {
 
   const fetchNotes = async () => {
     try {
-      const res = await api.get("/viewNotes");
+      const res = await axios.get("/viewNotes");
       setNotes(res.data);
     } catch (err) {
       setMessage("❌ Failed to fetch notes");
@@ -27,7 +27,7 @@ const Notes = () => {
   const addNote = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post("/addNotes", form);
+      const res = await axios.post("/addNotes", form);
       setNotes([...notes, res.data.data]);
       setForm({ title: "", content: "" });
       setMessage("✅ Note added");
@@ -104,5 +104,6 @@ const Notes = () => {
 };
 
 export default Notes;
+
 
 
