@@ -16,5 +16,14 @@ export default defineConfig({
     host: '0.0.0.0',
     port: process.env.PORT || 4173,
     allowedHosts: ['.onrender.com', 'localhost', '127.0.0.1']
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      }
+    }
   }
 })
