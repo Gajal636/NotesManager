@@ -14,7 +14,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post("/register", form);
+      const res = await axios.post("/register", form);
       setMessage("✅ " + res.data.message);
       navigate("/login")
     } catch (err) {
@@ -23,7 +23,7 @@ const Register = () => {
   };
 const registerUser = async () => {
     try {
-      const response = await api.post("http://localhost:3000/register", {
+      const response = await axios.post("http://localhost:3000/register", {
         name: form.name,
         email: form.email,
         password: form.password,
@@ -79,5 +79,6 @@ const registerUser = async () => {
 };
 
 export default Register;
+
 
 
