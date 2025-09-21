@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import api from "../api/axios";
+import api from "/axios";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -79,3 +79,4 @@ const registerUser = async () => {
 };
 
 export default Register;
+
