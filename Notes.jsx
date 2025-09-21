@@ -1,5 +1,5 @@
 import React from "react";
-import api from "../axios";
+import api from "/axios";
 
 const Notes = () => {
   const [notes, setNotes] = React.useState([]);
@@ -139,3 +139,4 @@ const Notes = () => {
 };
 
 export default Notes;
+
