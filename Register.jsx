@@ -1,85 +1,96 @@
 import React from "react";
-import axios from "axios"
+import api from "../axios"; // Consistent import
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
-  const [message, setMessage] = useState("");
+  const [form, setForm] = React.useState({ name: "", email: "", password: "" }); // React.useState for React 19
+  const [message, setMessage] = React.useState("");
   const navigate = useNavigate();
-
+  
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/register", form);
+      const res = await api.post("/register", form); // Using api instead of axios
       setMessage("✅ " + res.data.message);
-      navigate("/login")
+      
+      // 2 seconds wait karke login pe redirect
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+      
     } catch (err) {
       setMessage("❌ " + (err.response?.data?.message || "Registration failed"));
     }
   };
-const registerUser = async () => {
-    try {
-      const response = await axios.post("http://localhost:3000/register", {
-        name: form.name,
-        email: form.email,
-        password: form.password,
-      });
-
-      if (response.data && response.data.success) {
-        alert("Registration successful!");
-        navigate("/login"); // ✅ Redirect to login page
-      } else {
-        alert("Registration failed!");
-      }
-    } catch (error) {
-      console.error("Error registering user:", error);
-      alert("Registration failed. Try again.");
-    }
-  };
-
+  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white shadow-lg p-6 rounded-lg w-96">
-        <h2 className="text-xl font-bold mb-4">Register</h2>
+        <h2 className="text-xl font-bold mb-4 text-center">Register</h2>
+        
         <input
           type="text"
           name="name"
-          placeholder="Name"
+          placeholder="Full Name"
           value={form.name}
           onChange={handleChange}
-          className="w-full border p-2 mb-3 rounded"
+          className="w-full border p-2 mb-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+          required
         />
+        
         <input
           type="email"
           name="email"
           placeholder="Email"
           value={form.email}
           onChange={handleChange}
-          className="w-full border p-2 mb-3 rounded"
+          className="w-full border p-2 mb-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+          required
         />
+        
         <input
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="Password (min 6 characters)"
           value={form.password}
           onChange={handleChange}
-          className="w-full border p-2 mb-3 rounded"
+          className="w-full border p-2 mb-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+          minLength="6"
+          required
         />
-        <button type="submit" className="w-full bg-green-500 text-white p-2 rounded">
+        
+        <button 
+          type="submit" 
+          className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600 transition-colors"
+        >
           Register
         </button>
-        {message && <p className="mt-3 text-sm">{message}</p>}
+        
+        {message && (
+          <p className="mt-3 text-sm text-center p-2 rounded bg-gray-100">
+            {message}
+          </p>
+        )}
+        
+        <div className="text-center mt-4">
+          <p className="text-gray-600">
+            Already have an account?{' '}
+            <button 
+              type="button"
+              onClick={() => navigate('/login')} 
+              className="text-green-500 hover:underline font-medium"
+            >
+              Login here
+            </button>
+          </p>
+        </div>
       </form>
     </div>
   );
 };
 
 export default Register;
-
-
-
-
