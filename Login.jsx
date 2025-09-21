@@ -1,10 +1,10 @@
-import React from "react";
-import api from "/axios";
+import React, { useState } from "react";
+import api from "../axios";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [form, setForm] = React.useState({ email: "", password: "" });
-  const [message, setMessage] = React.useState("");
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [message, setMessage] = useState("");
   const navigate = useNavigate()
   
   const handleChange = (e) => {
@@ -18,12 +18,10 @@ const Login = () => {
       setMessage("✅ Login successful");
       console.log("User:", res.data.user);
       
-      // Token save karo
       if (res.data.token) {
         localStorage.setItem('token', res.data.token);
       }
       
-      // Navigate to notes
       navigate("/notes")
     } catch (err) {
       setMessage("❌ " + (err.response?.data?.message || "Login failed"));
@@ -86,4 +84,3 @@ const Login = () => {
 };
 
 export default Login;
-
