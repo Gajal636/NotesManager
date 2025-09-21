@@ -14,7 +14,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post("/login", form);
+      const res = await axios.post("/login", form);
       setMessage("✅ Login successful");
       console.log("User:", res.data.user);
       navigate("/notes")
@@ -53,5 +53,6 @@ const Login = () => {
 };
 
 export default Login;
+
 
 
