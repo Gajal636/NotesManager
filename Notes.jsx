@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import api from "/axios";
+import axios from "axios"
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
@@ -104,4 +104,5 @@ const Notes = () => {
 };
 
 export default Notes;
+
 
