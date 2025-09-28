@@ -1,9 +1,11 @@
 services:
-  - type: web
-    name: notesmanager
-    env: node
-    buildCommand: npm install --legacy-peer-deps && npm run build
-    startCommand: npm run start
-    envVars:
-      - key: NODE_ENV
-        value: production
+     - type: web
+       name: notesmanager
+       env: node
+       buildCommand: npm install --legacy-peer-deps && npm run build
+       startCommand: npm run start
+       envVars:
+         - key: NODE_ENV
+           value: production
+         - key: PORT
+           value: 10000
