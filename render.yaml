@@ -1,9 +1,6 @@
 services:
   - type: web
     name: notesmanager
-    env: node
+    env: static
     buildCommand: npm install --legacy-peer-deps && npm run build
-    startCommand: npm run start
-    envVars:
-      - key: NODE_ENV
-        value: production
+    staticPublishPath: ./dist
